@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChamadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function(){
+
+});
+
 Route::view('/', 'home')->name('home');
+
+Route::resource('chamados', ChamadoController::class);
+
