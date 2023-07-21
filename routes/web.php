@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChamadoController;
+use App\Http\Controllers\SolicitanteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,6 @@ Route::middleware('auth')->group(function(){
 Route::view('/', 'home')->name('home');
 
 Route::resource('chamados', ChamadoController::class);
+
+Route::get('/solicitante', [SolicitanteController::class, 'buscar']);
 

@@ -1,3 +1,45 @@
+@push('script')
+    <script>
+        $("#input-solicitante").keyup(function(){
+            $("#selecionar-solicitantes").empty();
+
+            let item = $(this).val();
+            item = item.trim();
+
+            if(item != "")
+            {
+                let url_base = window.location.origin;
+                let url_busca = url_base+'/solicitante';
+
+                $.ajax({
+                    method: "GET",
+                    url: url_busca,
+                    data: { solicitante: item },
+                    success: function(solicitantes){
+                        $("#selecionar-solicitantes").empty();
+
+                        for(solicitante of solicitantes)
+                        {
+                            let jsonSolicitante = JSON.parse(solicitante);
+                            let element = 
+                                "<button type='button' name='item-solicitante' class='list-group-item' value='btn' onClick='adicionarSolicitante(this)'>"+
+                                    jsonSolicitante.name+"<input type='hidden' name='solicitantes[]' value='"+jsonSolicitante.id+"'/>"+
+                                "</button>";
+                            $("#selecionar-solicitantes").append(element);
+                        }
+                }
+                });
+            }
+        });
+
+        function adicionarSolicitante(element)
+        {
+            $(element).addClass('bg-secondary text-white');
+            $("#solicitantes-selecionados").append(element);
+        }
+    </script>
+@endpush
+
 <x-layout>
     <div class="d-flex justify-content-center">
         <div class="card m-3" style="width: 500px">
@@ -40,6 +82,20 @@
                         @error('urgencia')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+                    <div class="mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="input-solicitante" class="form-label">Buscar solicitantes</label>
+                                    <input type="text" id="input-solicitante" class="form-control"/>
+                                    <div id="selecionar-solicitantes" class="list-group"></div>
+                                </div>
+                                <label for="" class="form-label">Solicitantes selecionados:</label>
+                                <ul id="solicitantes-selecionados" class="list-group">
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex">
                         <button type="submit" class="btn btn-primary ms-auto">
