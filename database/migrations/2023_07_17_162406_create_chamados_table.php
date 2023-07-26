@@ -19,6 +19,7 @@ class CreateChamadosTable extends Migration
             $table->string('descricao');
             $table->integer('status');
             $table->integer('urgencia');
+            $table->string('urgencia_justificativa')->nullable();
             $table->timestamps();
         });
     }
