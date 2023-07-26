@@ -1,109 +1,110 @@
+@section('title', 'Criar chamado')
+
 @push('script')
     <script>
-        $("#input-solicitante").keyup(function(){
-            $("#selecionar-solicitantes").empty();
+        let url_base = window.location.origin;
+        let url_busca = url_base+'/solicitante';
 
-            let item = $(this).val();
-            item = item.trim();
-
-            if(item != "")
-            {
-                let url_base = window.location.origin;
-                let url_busca = url_base+'/solicitante';
-
-                $.ajax({
-                    method: "GET",
-                    url: url_busca,
-                    data: { solicitante: item },
-                    success: function(solicitantes){
-                        $("#selecionar-solicitantes").empty();
-
-                        for(solicitante of solicitantes)
-                        {
-                            let jsonSolicitante = JSON.parse(solicitante);
-                            let element = 
-                                "<button type='button' name='item-solicitante' class='list-group-item' value='btn' onClick='adicionarSolicitante(this)'>"+
-                                    jsonSolicitante.name+"<input type='hidden' name='solicitantes[]' value='"+jsonSolicitante.id+"'/>"+
-                                "</button>";
-                            $("#selecionar-solicitantes").append(element);
-                        }
+        $(document).ready(function(){
+            $.ajax({
+                method: "GET",
+                url: url_busca,
+                async: false,
+                success: function(itens){
+                    for(item of itens)
+                    {
+                        let jsonSolicitante = JSON.parse(item);
+                        $(".chosen").append($('<option>', {
+                            value: jsonSolicitante.id,
+                            text: jsonSolicitante.name,
+                        }));
+                    }
                 }
-                });
-            }
-        });
+            });
 
-        function adicionarSolicitante(element)
-        {
-            $(element).addClass('bg-secondary text-white');
-            $("#solicitantes-selecionados").append(element);
-        }
+            $(".chosen").chosen();
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        });
     </script>
 @endpush
 
+@push('style')
+    <style>
+        .chosen{
+            width: 100% !important;
+        }
+    </style>
+@endpush
+
 <x-layout>
+    <x-menu/>
     <div class="d-flex justify-content-center">
         <div class="card m-3" style="width: 500px">
-            <div class="card-body">
-                <form action="{{ route('chamados.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="titulo-input" class="form-label">Título</label>
-                        <input type="text" name="titulo" id="titulo-input" class="form-control @error('titulo') is-invalid @enderror" autofocus/>
-                        @error('titulo')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="descricao-input" class="form-label">Descrição</label>
-                        <input type="text" name="descricao" id="descricao-input" class="form-control @error('descricao') is-invalid @enderror">
-                        @error('descricao')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="status-input" class="form-label">Status</label>
-                        <select name="status" id="status-input" class="form-select @error('status') is-invalid @enderror">
-                            <option value="{{ $status_aberto }}">{{ $status_descricao[$status_aberto] }}</option>
-                            <option value="{{ $status_em_andamento }}">{{ $status_descricao[$status_em_andamento] }}</option>
-                            <option value="{{ $status_solucionado }}">{{ $status_descricao[$status_solucionado] }}</option>
-                            <option value="{{ $status_excluido }}">{{ $status_descricao[$status_excluido] }}</option>
-                        </select>
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="urgencia-input" class="form-label">Urgência</label>
-                        <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror">
-                            <option value="{{ $urgencia_baixa }}">{{ $urgencia_descricao[$urgencia_baixa] }}</option>
-                            <option value="{{ $urgencia_media }}">{{ $urgencia_descricao[$urgencia_media] }}</option>
-                            <option value="{{ $urgencia_alta }}">{{ $urgencia_descricao[$urgencia_alta] }}</option>
-                        </select>
-                        @error('urgencia')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="input-solicitante" class="form-label">Buscar solicitantes</label>
-                                    <input type="text" id="input-solicitante" class="form-control"/>
-                                    <div id="selecionar-solicitantes" class="list-group"></div>
-                                </div>
-                                <label for="" class="form-label">Solicitantes selecionados:</label>
-                                <ul id="solicitantes-selecionados" class="list-group">
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <button type="submit" class="btn btn-primary ms-auto">
-                            Salvar
-                        </button>
-                    </div>
-                </form>
+        <form action="{{ route('chamados.store') }}" method="POST">
+            @csrf
+            <div class="card-header text-center">
+                Criar chamado
             </div>
-        </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="titulo-input" class="form-label">Título</label>
+                    <input type="text" name="titulo" id="titulo-input" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}" autofocus/>
+                    @error('titulo')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="descricao-input" class="form-label">Descrição</label>
+                    <textarea id="descricao-input" name="descricao" style="height: 100px" class="form-control @error('descricao') is-invalid @enderror">{{ old('descricao') }}</textarea>
+                    @error('descricao')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="urgencia-input" class="form-label">Urgência</label>
+                    <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror">
+                        @if(old('urgencia'))
+                            <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia') == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
+                            <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia') == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
+                            <option value="{{ Urgencia::ALTA }}" @if(old('urgencia') == Urgencia::ALTA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
+                        @else
+                            <option value="{{ Urgencia::BAIXA }}">{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
+                            <option value="{{ Urgencia::MEDIA }}" selected>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
+                            <option value="{{ Urgencia::ALTA }}">{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
+                        @endif
+                    </select>
+                    @error('urgencia')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3" id="urgencia_justificativa-div">
+                    <label for="urgencia_justificativa-textarea" class="form-label">Justifique a urgência</label>
+                    <span class="ms-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="É obrigatório preencher este campo apenas ao selecionar a opção '{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}' no campo de Urgência">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </span>
+                    <textarea name="urgencia_justificativa" id="urgencia_justificativa-textarea" class="form-control @error('urgencia_justificativa') is-invalid @enderror" style="height: 100px"></textarea>
+                    @error('urgencia_justificativa')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Quem está solicitando este chamado?</label>
+                    <select name="solicitantes[]" class="form-control chosen @error('solicitantes') is-invalid @enderror" multiple="true" data-placeholder="Selecione os solicitantes" style="width: 450px">
+                    </select>
+                    @error('solicitantes')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                        <i class="fa-solid fa-plus me-1"></i>Enviar chamado
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </x-layout>
