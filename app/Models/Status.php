@@ -9,10 +9,10 @@ class Status extends Model
 {
     use HasFactory;
 
-    const aberto = 1;
-    const em_andamento = 2;
-    const solucionado = 3;
-    const excluido = 4;
+    const ABERTO = 1;
+    const EM_ANDAMENTO = 2;
+    const SOLUCIONADO = 3;
+    const EXCLUIDO = 4;
 
-    const descricao = ['', 'Aberto', 'Em andamento', 'Solucionado', 'Excluído'];
+    const DESCRICAO = ['', 'Aberto', 'Em andamento', 'Solucionado', 'Excluído'];
 }
