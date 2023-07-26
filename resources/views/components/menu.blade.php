@@ -7,13 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                    <a aria-current="page" href="{{ route('home') }}" class="nav-link @if(request()->route()->getName() == 'home') bg-light fw-bold @endif">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('chamados.create') }}" class="nav-link">Criar chamado</a>
+                    <a href="{{ route('chamados.create') }}" class="nav-link @if(request()->route()->getName() == 'chamados.create') bg-light fw-bold @endif">Criar chamado</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('chamados.index') }}" class="nav-link">Consultar chamados</a>
+                    <a href="{{ route('chamados.index') }}" class="nav-link @if(request()->route()->getName() == 'chamados.index') bg-light fw-bold @endif">Consultar chamados</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Configurações</a>
