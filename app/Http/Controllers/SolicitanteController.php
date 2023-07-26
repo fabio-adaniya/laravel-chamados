@@ -9,7 +9,12 @@ class SolicitanteController extends Controller
 {
     public function buscar(Request $request)
     {
-        $users = User::where('name', 'LIKE', '%'.$request->solicitante.'%')->limit(5)->get();
+        if($request)
+            $users = User::where('name', 'LIKE', '%'.$request->solicitante.'%');
+        else
+            $users = User::whereNotNull('id');
+
+        $users = $users->get();
         
         $items = [];
 
