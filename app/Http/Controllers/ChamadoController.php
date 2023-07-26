@@ -4,53 +4,66 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chamado;
+use App\Models\User;
+use App\Models\ChamadoSolicitante;
 use App\Models\Status;
 use App\Models\Urgencia;
-use App\Models\User;
+use App\Models\Perfil;
 
 class ChamadoController extends Controller
 {
     public function index()
     {
-        $chamados = auth()->user()->meusChamados();
+        if(auth()->user()->perfil_id == Perfil::USUARIO)
+            $chamados = auth()->user()->chamados;
+        else
+            $chamados = Chamado::whereNotNull('id')->get();
+
         return view('chamados.index', ['chamados' => $chamados]);
     }
 
     public function store(Request $request)
-    {
+    {   
         $validated = $request->validate([
             'titulo' => 'required',
             'descricao' => 'required',
-            'status' => 'required',
             'urgencia' => 'required',
+            'solicitantes' => 'required',
+            'urgencia_justificativa' => 'required_if:urgencia,==,'.Urgencia::ALTA,
         ]);
 
-        Chamado::create($validated);
+        $chamado = $this->criarChamado($validated);
+
+        $this->criarSolicitantesDoChamado($request, $chamado);
 
         return redirect()->route('home');
     }
 
+    public function criarChamado($validated)
+    {
+        $validated['status'] = Status::ABERTO;
+        return Chamado::create($validated);
+    }
+
+    public function criarSolicitantesDoChamado(Request $request, $chamado)
+    {
+        foreach($request->solicitantes as $solicitante)
+        {
+            ChamadoSolicitante::create([
+                'user_id' => $solicitante,
+                'chamado_id' => $chamado->id,
+            ]);
+        }
+    }
+
     public function create()
     {
-        $status = new Status;
-        $urgencia = new Urgencia;
-
-        return view('chamados.create',
-            ['status_aberto' => $status::aberto, 
-            'status_em_andamento' => $status::em_andamento,
-            'status_solucionado' => $status::solucionado,
-            'status_excluido' => $status::excluido,
-            'status_descricao' => $status::descricao,
-            'urgencia_baixa' => $urgencia::baixa,
-            'urgencia_media' => $urgencia::media,
-            'urgencia_alta' => $urgencia::alta,
-            'urgencia_descricao' => $urgencia::descricao,
-        ]);
+        return view('chamados.create');
     }
 
     public function show(Chamado $chamado)
     {
-        return view('chamados.show');
+        return view('chamados.show', ['chamado' => $chamado]);
     }
 
     public function update(Chamado $chamado)
