@@ -1,3 +1,5 @@
+@section('title', 'Login - '.config('app.name'))
+
 @push('script')
     <script>
         $(document).ready(function(){
@@ -40,9 +42,8 @@
             <div class="card-body">
                 <form action="{{ route('login.validar') }}" method="POST">
                     @csrf
-                    <div class="d-flex justify-content-center fw-bold mb-3">
-                        <span>Login</span>
-                    </div>
+                    <div class="d-flex justify-content-center mb-3">{{ config('app.name') }}</div>
+                    <div class="d-flex justify-content-center fw-bold mb-3">Login</div>
                     <div class="d-flex justify-content-center">
                         <div class="d-flex gap-3">
                             <div class="form-check">
