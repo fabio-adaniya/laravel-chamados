@@ -9,9 +9,9 @@ class Urgencia extends Model
 {
     use HasFactory;
 
-    const baixa = 1;
-    const media = 2;
-    const alta = 3;
+    const BAIXA = 1;
+    const MEDIA = 2;
+    const ALTA = 3;
 
-    const descricao = ['', 'Baixa', 'Média', 'Alta'];
+    const DESCRICAO = ['', 'Baixa', 'Média', 'Alta'];
 }
