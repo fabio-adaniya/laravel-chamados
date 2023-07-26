@@ -32,7 +32,7 @@ class LoginController extends Controller
         if($autenticacao)
         {
             $request->session()->regenerate();
-            return redirect()->intended('home'); 
+            return redirect()->intended('home');
         }
 
         return back()->withErrors([
