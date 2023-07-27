@@ -2,6 +2,24 @@
 
 <x-layout>
     <x-menu/>
+    @if(auth()->user()->perfil_id != Perfil::USUARIO)
+        <div class="card m-3">
+            <div class="card-body">
+                <form action="" method="GET">
+                    <div class="d-flex">
+                        <div class="form-check">
+                            <input id="meus_chamados-input" name="meus_chamados" type="checkbox" class="form-check-input" @if(Request::query("meus_chamados")) checked @endif>
+                            <label class="form-check-label" for="meus_chamados-input">
+                                Buscar apenas os menus chamados
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-3">Pesquisar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
+
     <div class="card m-3">
         <table class="table">
             <thead>

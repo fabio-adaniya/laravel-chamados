@@ -228,5 +228,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Status' => App\Models\Status::class,
         'Urgencia' => App\Models\Urgencia::class,
+        'Perfil' => App\Models\Perfil::class,
     ],
 ];
