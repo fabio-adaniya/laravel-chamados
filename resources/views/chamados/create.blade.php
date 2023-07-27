@@ -91,8 +91,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Quem está solicitando este chamado?</label>
-                    <select name="solicitantes[]" class="form-control chosen @error('solicitantes') is-invalid @enderror" multiple="true" data-placeholder="Selecione os solicitantes" style="width: 450px">
-                    </select>
+                    <div class="d-flex">
+                        <select name="solicitantes[]" class="form-control chosen @error('solicitantes') is-invalid @enderror" multiple="true" data-placeholder="Selecione os solicitantes" style="width: 450px">
+                        </select>
+                    </div>
                     @error('solicitantes')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
