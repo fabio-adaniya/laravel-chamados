@@ -5,15 +5,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-current="page" href="{{ route('home') }}" class="nav-link @if(request()->route()->getName() == 'home') bg-light fw-bold @endif">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link @if(request()->route()->getName() == 'home') fw-bold text-primary @endif">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('chamados.create') }}" class="nav-link @if(request()->route()->getName() == 'chamados.create') bg-light fw-bold @endif">Criar chamado</a>
+                    <a href="{{ route('chamados.create') }}" class="nav-link @if(request()->route()->getName() == 'chamados.create') fw-bold text-primary @endif">Criar chamado</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('chamados.index') }}" class="nav-link @if(request()->route()->getName() == 'chamados.index') bg-light fw-bold @endif">Consultar chamados</a>
+                    <a href="{{ route('chamados.index') }}" class="nav-link @if(request()->route()->getName() == 'chamados.index') fw-bold text-primary @endif">Consultar chamados</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Configurações</a>
