@@ -29,8 +29,13 @@ class User extends Authenticatable
         return $this->attributes['password'] = bcrypt($value);
     }
 
-    public function chamados()
+    public function chamados($status = null)
     {
-        return $this->belongsToMany(Chamado::class, 'chamados_solicitantes', 'user_id', 'chamado_id');
+        $query = $this->belongsToMany(Chamado::class, 'chamados_solicitantes', 'user_id', 'chamado_id');
+
+        if($status)
+            $query->where('status', $status);
+
+        return $query;
     }
 }
