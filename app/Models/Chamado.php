@@ -11,7 +11,7 @@ class Chamado extends Model
     use HasFactory;
 
     protected $table = 'chamados';
-    protected $fillable = ['titulo', 'descricao', 'status', 'urgencia'];
+    protected $fillable = ['titulo', 'descricao', 'status', 'urgencia', 'urgencia_justificativa'];
 
     public function solicitantes()
     {
