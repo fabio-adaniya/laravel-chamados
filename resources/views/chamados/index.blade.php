@@ -10,7 +10,7 @@
                         <div class="form-check">
                             <input id="meus_chamados-input" name="meus_chamados" type="checkbox" class="form-check-input" @if(Request::query("meus_chamados")) checked @endif>
                             <label class="form-check-label" for="meus_chamados-input">
-                                Buscar apenas os menus chamados
+                                Buscar apenas os meus chamados
                             </label>
                         </div>
                         <button type="submit" class="btn btn-sm btn-outline-success ms-3">Pesquisar</button>
@@ -40,7 +40,7 @@
                         <td style="width: 1%">{{ Urgencia::DESCRICAO[$chamado->urgencia] }}</td>
                         <td style="width: 1%" class="text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
                         <td style="width: 1%" class="text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
-                        <td><a href="{{ route('chamados.show', $chamado) }}" class="nav-link text-secondary fw-bold">{{ $chamado->titulo }}</a></td>
+                        <td><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}" class="nav-link text-secondary fw-bold">{{ $chamado->titulo }}</a></td>
                     </tr>
                 @empty
                     <tr>
