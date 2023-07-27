@@ -12,12 +12,20 @@ use App\Models\Perfil;
 
 class ChamadoController extends Controller
 {
-    public function index()
-    {
-        if(auth()->user()->perfil_id == Perfil::USUARIO)
-            $chamados = auth()->user()->chamados;
+    public function index(Request $request)
+    {    
+        if(auth()->user()->perfil_id != Perfil::USUARIO)
+        {
+            if(isset($request->meus_chamados) && ($request->meus_chamados))
+                $chamados = auth()->user()->chamados;
+            else
+            {
+                $chamados = Chamado::whereNotNull('id');
+                $chamados = $chamados->get();
+            }
+        }
         else
-            $chamados = Chamado::whereNotNull('id')->get();
+            $chamados = auth()->user()->chamados;
 
         return view('chamados.index', ['chamados' => $chamados]);
     }
