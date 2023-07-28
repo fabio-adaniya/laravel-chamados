@@ -31,12 +31,22 @@
                     <label class="form-label">Última atualização</label>
                     <input type="text" class="form-control" value="{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}" disabled>
                 </div>
-                <label class="form-label">Solicitantes do chamado</label>
-                <ul class="list-group">
-                    @foreach($chamado->solicitantes as $solicitante)
-                        <li class="list-group-item">{{ $solicitante->usuario->name }}</li>
-                    @endforeach
-                </ul>
+                <div class="mb-3">
+                    <label class="form-label">Solicitantes do chamado</label>
+                    <ul class="list-group">
+                        @foreach($chamado->solicitantes as $solicitante)
+                            <li class="list-group-item">{{ $solicitante->usuario->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @if($chamado->atribuidos->count() > 0)
+                    <label class="form-label">Atribuídos ao chamado</label>
+                    <ul class="list-group">
+                        @foreach($chamado->atribuidos as $atribuido)
+                            <li class="list-group-item">{{ $atribuido->usuario->name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         </div>
         <div class="card border-0 flex-fill">
