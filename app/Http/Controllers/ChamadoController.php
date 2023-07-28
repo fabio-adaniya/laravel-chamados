@@ -9,6 +9,7 @@ use App\Models\ChamadoSolicitante;
 use App\Models\Status;
 use App\Models\Urgencia;
 use App\Models\Perfil;
+use App\Models\ChamadoAtribuido;
 
 class ChamadoController extends Controller
 {
@@ -74,18 +75,47 @@ class ChamadoController extends Controller
         return view('chamados.show', ['chamado' => $chamado]);
     }
 
-    public function update(Chamado $chamado)
+    public function edit(Chamado $chamado)
     {
-        return redirect()->route('home');
+        return view('chamados.edit', ['chamado' => $chamado]);
+    }
+
+    public function update(Request $request, Chamado $chamado)
+    {
+        $validated = $request->validate([
+            'status' => 'required',
+            'urgencia' => 'required',
+            'atribuidos' => 'nullable',
+        ]);
+
+        $chamado->fill($validated);
+        $chamado->save();
+
+        $this->criarAtribuidosDoChamado($request, $chamado->id);
+
+        return redirect()->route('chamados.index');
+    }
+
+    public function deletarAtribuidosDoChamado($chamado)
+    {
+        $chamado = ChamadoAtribuido::where('chamado_id', $chamado); 
+        $chamado->delete();
+    }
+
+    public function criarAtribuidosDoChamado(Request $request, $chamado)
+    {
+        $this->deletarAtribuidosDoChamado($chamado);       
+
+        if($request->atribuidos)
+            foreach($request->atribuidos as $atribuido)
+                ChamadoAtribuido::create([
+                    'user_id' => $atribuido,
+                    'chamado_id' => $chamado,
+                ]);
     }
 
     public function destroy(Chamado $chamado)
     {
         return redirect()->route('home');
-    }
-
-    public function edit(Chamado $chamado)
-    {
-        return view('chamados.edit');
     }
 }

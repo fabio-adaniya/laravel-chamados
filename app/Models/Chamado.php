@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ChamadoSolicitante;
+use App\Models\ChamadoAtribuido;
 
 class Chamado extends Model
 {
@@ -16,5 +17,10 @@ class Chamado extends Model
     public function solicitantes()
     {
         return $this->hasMany(ChamadoSolicitante::class, 'chamado_id', 'id');
+    }
+
+    public function atribuidos()
+    {
+        return $this->hasMany(ChamadoAtribuido::class, 'chamado_id', 'id');
     }
 }

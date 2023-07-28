@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\SolicitanteController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AtribuidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('chamados', ChamadoController::class);
     Route::get('/solicitante', [SolicitanteController::class, 'buscar']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/atribuido', [AtribuidoController::class, 'buscar']);
 });
 
 Route::view('/login', 'login')->name('login');
