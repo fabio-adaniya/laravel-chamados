@@ -4,7 +4,7 @@
     <x-menu/>
     <div class="d-flex">
         <div class="card m-3" style="width: 500px">
-            <div class="card-header text-center">
+            <div class="card-header text-center bg-primary bg-opacity-10">
                 Meus chamados - Status
             </div>
             <div class="card-body">

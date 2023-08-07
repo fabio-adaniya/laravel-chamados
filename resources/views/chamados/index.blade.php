@@ -3,7 +3,7 @@
 <x-layout>
     <x-menu/>
     @if(auth()->user()->perfil_id != Perfil::USUARIO)
-        <div class="card m-3">
+        <div class="card m-3 bg-primary bg-opacity-10">
             <div class="card-body">
                 <form action="" method="GET">
                     <div class="d-flex">
@@ -21,37 +21,34 @@
             </div>
         </div>
     @endif
-
-    <div class="card m-3">
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead>
+    <div class="table-responsive mx-3">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Urgência</th>
+                    <th scope="col">Abertura</th>
+                    <th scope="col">Última atualização</th>
+                    <th scope="col">Título</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($chamados as $chamado)
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Urgência</th>
-                        <th scope="col">Abertura</th>
-                        <th scope="col">Última atualização</th>
-                        <th scope="col">Título</th>
+                        <td style="width: 1%" class="border text-nowrap">{{ $chamado->id }}</td>
+                        <td style="width: 1%" class="border text-nowrap">{{ Status::DESCRICAO[$chamado->status] }}</td>
+                        <td style="width: 1%" class="border text-nowrap">{{ Urgencia::DESCRICAO[$chamado->urgencia] }}</td>
+                        <td style="width: 1%" class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
+                        <td style="width: 1%" class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
+                        <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}" class="nav-link text-secondary fw-bold">{{ $chamado->titulo }}</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    @forelse($chamados as $chamado)
-                        <tr>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->id }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ Status::DESCRICAO[$chamado->status] }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ Urgencia::DESCRICAO[$chamado->urgencia] }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
-                            <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}" class="nav-link text-secondary fw-bold">{{ $chamado->titulo }}</a></td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="99">Nenhum chamado foi localizado</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+                @empty
+                    <tr>
+                        <td colspan="99">Nenhum chamado foi localizado</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </x-layout>

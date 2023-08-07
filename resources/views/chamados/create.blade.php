@@ -41,10 +41,10 @@
 <x-layout>
     <x-menu/>
     <div class="d-flex justify-content-center">
-        <div class="card m-3" style="width: 500px">
+        <div class="card m-3" style="width: 700px">
         <form action="{{ route('chamados.store') }}" method="POST">
             @csrf
-            <div class="card-header text-center">
+            <div class="card-header text-center bg-primary bg-opacity-10">
                 Criar chamado
             </div>
             <div class="card-body">
@@ -100,7 +100,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer bg-primary bg-opacity-10">
                 <div class="d-flex">
                     <button type="submit" class="btn btn-primary btn-sm ms-auto">
                         <i class="fa-solid fa-plus me-1"></i>Enviar chamado

@@ -50,7 +50,7 @@
     <x-menu/>
     <h3 class="text-center mt-3">Editar chamado - {{ $chamado->id }}</h3>
     <div class="d-flex flex-wrap m-3">
-        <div class="card border-0" style="width: 250px">
+        <div class="card border" style="width: 250px">
             <div class="card-body">
                 <form action="{{ route('chamados.update', $chamado) }}" method="POST">
                     @method('PUT')
@@ -121,7 +121,7 @@
                 </ul>
             </div>
         </div>
-        <div class="card border-0 flex-fill">
+        <div class="card border flex-fill">
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label">Título</label>
