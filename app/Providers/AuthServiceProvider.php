@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use App\Models\Perfil;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(function(User $user){
+            if($user->perfil_id == Perfil::ADMINISTRADOR)
+                return true;
+        });
+
+        Gate::define('perfil-tecnico', function(User $user){
+            return $user->perfil_id == Perfil::TECNICO;
+        });
+
+        Gate::define('perfil-usuario', function(User $user){
+            return $user->perfil_id == Perfil::USUARIO;
+        });
     }
 }

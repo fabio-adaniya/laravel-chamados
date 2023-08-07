@@ -72,11 +72,15 @@ class ChamadoController extends Controller
 
     public function show(Chamado $chamado)
     {
+        $this->authorize('perfil-usuario');
+
         return view('chamados.show', ['chamado' => $chamado]);
     }
 
     public function edit(Chamado $chamado)
     {
+        $this->authorize('perfil-tecnico');
+        
         return view('chamados.edit', ['chamado' => $chamado]);
     }
 
