@@ -10,8 +10,33 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
         @stack('style')
+        <style>
+            .sand-dollar{
+                background-color: #E5DDC8;
+            }
+
+            .teal{
+                background-color: #01949A;
+            }
+
+            .baby-blue{
+                background-color: #C3E0E5;
+            }
+
+            .blue-gray{
+                background-color: #5885AF;
+            }
+
+            .dark-blue{
+                background-color: #274472;
+            }
+
+            .ivory{
+                background-color: #EDE7DC;
+            }
+        </style>
     </head>
-    <body class="bg-light">
+    <body class="ivory">
         {{ $slot }}
 
         @stack('script')
