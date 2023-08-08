@@ -1,9 +1,9 @@
-@section('title', 'Consultar chamados')
+@section('title', 'Consultar Chamados')
 
 <x-layout>
     <x-menu/>
     @if(auth()->user()->perfil_id != Perfil::USUARIO)
-        <div class="card m-3 bg-primary bg-opacity-10">
+        <div class="card m-3 bg-light">
             <div class="card-body">
                 <form action="" method="GET">
                     <div class="d-flex">
@@ -41,7 +41,7 @@
                         <td style="width: 1%" class="border text-nowrap">{{ Urgencia::DESCRICAO[$chamado->urgencia] }}</td>
                         <td style="width: 1%" class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
                         <td style="width: 1%" class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
-                        <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}" class="nav-link text-secondary fw-bold">{{ $chamado->titulo }}</a></td>
+                        <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}">{{ $chamado->titulo }}</a></td>
                     </tr>
                 @empty
                     <tr>
