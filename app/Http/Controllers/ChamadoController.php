@@ -22,11 +22,13 @@ class ChamadoController extends Controller
             else
             {
                 $chamados = Chamado::whereNotNull('id');
-                $chamados = $chamados->get();
+                $chamados = $chamados;
             }
         }
         else
             $chamados = auth()->user()->chamados;
+
+        $chamados = $chamados->paginate();
 
         return view('chamados.index', ['chamados' => $chamados]);
     }
@@ -45,7 +47,7 @@ class ChamadoController extends Controller
 
         $this->criarSolicitantesDoChamado($request, $chamado);
 
-        return redirect()->route('home');
+        return redirect()->route('chamados.index');
     }
 
     public function criarChamado($validated)
