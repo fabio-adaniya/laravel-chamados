@@ -15,6 +15,7 @@ class UsuariosSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => '123',
             'perfil_id' => '1',
+            'ativo' => true,
         ]);
 
         User::create([
@@ -23,6 +24,7 @@ class UsuariosSeeder extends Seeder
             'email' => 'tecnico@email.com',
             'password' => '123',
             'perfil_id' => '2',
+            'ativo' => true,
         ]);
 
         User::create([
@@ -30,7 +32,8 @@ class UsuariosSeeder extends Seeder
             'username' => 'user',
             'email' => 'user@email.com',
             'password' => '123',
-            'perfil_id' => '3'
+            'perfil_id' => '3',
+            'ativo' => true,
         ]);
     }
 }

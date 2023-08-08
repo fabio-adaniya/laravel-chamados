@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username', 'perfil_id', 'ativo',
     ];
 
     protected $hidden = [
@@ -35,6 +35,8 @@ class User extends Authenticatable
 
         if($status)
             $query->where('status', $status);
+
+        $query->paginate();
 
         return $query;
     }

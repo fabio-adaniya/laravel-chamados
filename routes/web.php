@@ -5,6 +5,7 @@ use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\SolicitanteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AtribuidoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/solicitante', [SolicitanteController::class, 'buscar']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/atribuido', [AtribuidoController::class, 'buscar']);
+    Route::resource('users', UserController::class);
 });
 
 Route::view('/login', 'login')->name('login');
