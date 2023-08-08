@@ -12,4 +12,6 @@ class Perfil extends Model
     const ADMINISTRADOR = 1;
     const TECNICO = 2;
     const USUARIO = 3;
+
+    const DESCRICAO = ['', 'Administrador', 'Técnico', 'Usuário'];
 }
