@@ -17,16 +17,16 @@ class LoginController extends Controller
                 'password' => 'required'
             ]);
 
-            $autenticacao = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+            $autenticacao = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'ativo' => true]);
         }
         else
         {
             $request->validate([
-                'username' => 'required', 
+                'username' => 'required',
                 'password' => 'required'
             ]);
 
-            $autenticacao = Auth::attempt(['username' => $request->username, 'password' => $request->password]);
+            $autenticacao = Auth::attempt(['username' => $request->username, 'password' => $request->password, 'ativo' => true]);
         }
 
         if($autenticacao)
