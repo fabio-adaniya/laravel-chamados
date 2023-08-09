@@ -3,9 +3,10 @@
 <x-layout>
     <x-menu/>
     <div class="table-responsive m-3">
-        <table class="table">
-            <thead>
+        <table class="table table-sm table-hover">
+            <thead class="teal text-white">
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Usuário</th>
                     <th scope="col">E-mail</th>
@@ -16,6 +17,7 @@
             <tbody>
                 @forelse($users as $user)
                     <tr>
+                        <td>{{ $user->id }}</td>
                         <td>
                             <a href="{{ route('users.show', $user) }}" class="link-opacity-10-hover">{{ $user->name }}</a>
                         </td>
@@ -29,6 +31,7 @@
                         <td colspan="99"></td>
                     </tr>
                 @endforelse
+                {{ $users->links() }}
             </tbody>
         </table>
     </div>

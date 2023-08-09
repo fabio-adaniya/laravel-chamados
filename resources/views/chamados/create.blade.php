@@ -45,7 +45,7 @@
             <form action="{{ route('chamados.store') }}" method="POST">
                 @csrf
                 <div class="card-header text-center teal text-white">
-                    Criar chamado
+                    Cadastrar Chamado
                 </div>
                 <div class="card-body">
                     <div class="mb-3">

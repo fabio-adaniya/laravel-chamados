@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="tab-pane fade table-responsive" id="chamados" role="tabpanel" aria-labelledby="chamados-tab">
-            <table class="table">
-                <thead>
+            <table class="table table-sm table-hover">
+                <thead class="teal text-white">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Status</th>
@@ -46,12 +46,12 @@
                 <tbody>
                     @forelse($user->chamados as $chamado)
                         <tr>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->id }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ Status::DESCRICAO[$chamado->status] }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ Status::DESCRICAO[$chamado->urgencia] }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
-                            <td style="width: 1%" class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
-                            <td class="border">{{ $chamado->titulo }}</td>
+                            <td class="border text-nowrap">{{ $chamado->id }}</td>
+                            <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}">{{ $chamado->titulo }}</a></td>
+                            <td class="border text-nowrap">{{ Status::DESCRICAO[$chamado->status] }}</td>
+                            <td class="border text-nowrap">{{ Status::DESCRICAO[$chamado->urgencia] }}</td>
+                            <td class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
+                            <td class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
                         </tr>
                     @empty
                         <tr>
