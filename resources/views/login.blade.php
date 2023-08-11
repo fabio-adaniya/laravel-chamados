@@ -78,7 +78,9 @@
                         @enderror
                     </div>
                     <div class="d-flex">
-                        <button type="submit" class="btn btn-primary ms-auto">Acessar</button>
+                        <button type="submit" class="btn btn-primary ms-auto">
+                            <i class="fa-solid fa-right-to-bracket"></i> Acessar
+                        </button>
                     </div>
                     @error('login')
                         <div class="d-flex justify-content-center">
