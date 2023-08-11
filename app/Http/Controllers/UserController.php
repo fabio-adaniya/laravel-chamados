@@ -22,6 +22,8 @@ class UserController extends Controller
 
     public function create()
     {
+        $this->authorize('perfil-tecnico');
+
         return view('users.create');
     }
 
@@ -45,6 +47,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('perfil-tecnico');
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required|email',
+            'perfil_id' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+
+        User::create($validated);
+
         return redirect()->route('users.index');
     }
 }
