@@ -18,15 +18,12 @@ class ChamadoController extends Controller
         if(auth()->user()->perfil_id != Perfil::USUARIO)
         {
             if(isset($request->meus_chamados) && ($request->meus_chamados))
-                $chamados = auth()->user()->chamados;
+                $chamados = auth()->user()->chamados();
             else
-            {
                 $chamados = Chamado::whereNotNull('id');
-                $chamados = $chamados;
-            }
         }
         else
-            $chamados = auth()->user()->chamados;
+            $chamados = auth()->user()->chamados();
 
         $chamados = $chamados->paginate();
 
