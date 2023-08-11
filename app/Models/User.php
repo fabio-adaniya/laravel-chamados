@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Chamado;
+use App\Models\Perfil;
 
 class User extends Authenticatable
 {
@@ -34,10 +35,23 @@ class User extends Authenticatable
         $query = $this->belongsToMany(Chamado::class, 'chamados_solicitantes', 'user_id', 'chamado_id');
 
         if($status)
-            $query->where('status', $status);
-
-        $query->paginate();
+            $query = $query->where('status', $status);
 
         return $query;
+    }
+
+    public function isAdministrador()
+    {
+        return $this->perfil_id == Perfil::ADMINISTRADOR;
+    }
+
+    public function isTecnico()
+    {
+        return $this->perfil_id == Perfil::TECNICO;
+    }
+
+    public function isUsuario()
+    {
+        return $this->perfil_id == Perfil::USUARIO;
     }
 }

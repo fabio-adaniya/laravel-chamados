@@ -28,16 +28,16 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function(User $user){
-            if($user->perfil_id == Perfil::ADMINISTRADOR)
+            if($user->isAdministrador())
                 return true;
         });
 
         Gate::define('perfil-tecnico', function(User $user){
-            return $user->perfil_id == Perfil::TECNICO;
+            return $user->isTecnico();
         });
 
         Gate::define('perfil-usuario', function(User $user){
-            return $user->perfil_id == Perfil::USUARIO;
+            return $user->isUsuario();
         });
     }
 }
