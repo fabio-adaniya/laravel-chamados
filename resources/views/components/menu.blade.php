@@ -23,15 +23,10 @@
                         <a href="{{ route('users.index') }}" class="nav-link @if(request()->route()->getName() == 'users.index') fw-bold text-primary @endif">Consultar Usuários</a>
                     </li>
                 @endcan
-                <li class="nav-item">
-                    <a class="nav-link" href="">Configurações</a>
-                </li>
             </ul>
             <ul class="navbar-nav gap-3">
                 <li class="nav-item">
-                    <button class="btn btn-outline-primary btn-sm">
-                        <i class="fa-solid fa-user"></i><span class="ms-1">{{ auth()->user()->name }}<span>
-                    </button>
+                    <i class="fa-solid fa-user"></i> {{ auth()->user()->name }}
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
