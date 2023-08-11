@@ -36,11 +36,11 @@
                 <thead class="teal text-white">
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Título</th>
                         <th scope="col">Status</th>
                         <th scope="col">Urgência</th>
                         <th scope="col">Abertura</th>
                         <th scope="col">Última atualização</th>
-                        <th scope="col">Título</th>
                     </tr>
                 </thead>
                 <tbody>
