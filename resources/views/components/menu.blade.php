@@ -26,7 +26,9 @@
             </ul>
             <ul class="navbar-nav gap-3">
                 <li class="nav-item">
-                    <i class="fa-solid fa-user"></i> {{ auth()->user()->name }}
+                    <a href="{{ route('users.show', auth()->user()) }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fa-solid fa-user"></i> {{ auth()->user()->name }}
+                    </a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
