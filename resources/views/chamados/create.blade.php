@@ -49,22 +49,22 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="titulo-input" class="form-label">Título</label>
-                        <input type="text" name="titulo" id="titulo-input" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}" autofocus/>
+                        <label for="titulo-input" class="form-label">Título <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" name="titulo" id="titulo-input" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}" autofocus required/>
                         @error('titulo')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="descricao-input" class="form-label">Descrição</label>
-                        <textarea id="descricao-input" name="descricao" style="height: 100px" class="form-control @error('descricao') is-invalid @enderror">{{ old('descricao') }}</textarea>
+                        <label for="descricao-input" class="form-label">Descrição <span class="text-danger fw-bold">*</span></label>
+                        <textarea id="descricao-input" name="descricao" style="height: 100px" class="form-control @error('descricao') is-invalid @enderror" required>{{ old('descricao') }}</textarea>
                         @error('descricao')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="urgencia-input" class="form-label">Urgência</label>
-                        <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror">
+                        <label for="urgencia-input" class="form-label">Urgência <span class="text-danger fw-bold">*</span></label>
+                        <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror" required>
                             @if(old('urgencia'))
                                 <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia') == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
                                 <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia') == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
@@ -90,9 +90,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">Quem está solicitando este chamado?</label>
+                        <label for="" class="form-label">Quem está solicitando este chamado? <span class="text-danger fw-bold">*</span></label>
                         <div class="d-flex">
-                            <select name="solicitantes[]" class="form-control chosen @error('solicitantes') is-invalid @enderror" multiple="true" data-placeholder="Selecione os solicitantes" style="width: 450px">
+                            <select name="solicitantes[]" class="form-control chosen @error('solicitantes') is-invalid @enderror" multiple="true" data-placeholder="Selecione os solicitantes" style="width: 450px" required>
                             </select>
                         </div>
                         @error('solicitantes')
