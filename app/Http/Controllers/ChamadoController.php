@@ -25,7 +25,17 @@ class ChamadoController extends Controller
         else
             $chamados = auth()->user()->chamados();
 
-        $chamados = $chamados->paginate();
+        if($request->status)
+            $chamados->where('status', $request->status);
+        if($request->urgencia)
+            $chamados->where('urgencia', $request->urgencia);
+
+        $registros_por_pagina = 15;
+
+        if($request->registros_por_pagina)
+            $registros_por_pagina = $request->registros_por_pagina;
+
+        $chamados = $chamados->paginate($registros_por_pagina);
 
         return view('chamados.index', ['chamados' => $chamados]);
     }
