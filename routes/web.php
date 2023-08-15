@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/atribuido', [AtribuidoController::class, 'buscar']);
     Route::resource('users', UserController::class);
+    Route::get('/users/{user}/chamados', [UserController::class, 'chamados'])->name('users.chamados');
 });
 
 Route::view('/login', 'login')->name('login');

@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        $this->authorize('acesso-pessoal', $user);
         return view('users.show', ['user' => $user]);
     }
 
@@ -29,6 +30,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('acesso-pessoal', $user);
         return view('users.edit', ['user' => $user]);
     }
 
@@ -36,7 +38,10 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
+            'username' => 'unique:users,username,'.$user->id,
+            'email' => 'unique:users,email,'.$user->id,
             'ativo' => 'required',
+            'perfil_id' => 'required',
         ]);
 
         $user->fill($validated);
@@ -61,5 +66,11 @@ class UserController extends Controller
         User::create($validated);
 
         return redirect()->route('users.index');
+    }
+
+    public function chamados(User $user)
+    {
+        $this->authorize('acesso-pessoal', $user);
+        return view('users.chamados', ['user' => $user]);
     }
 }
