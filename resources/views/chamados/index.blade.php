@@ -25,9 +25,6 @@
                         <option value="{{ Status::SOLUCIONADO }}" @if(Request::query('status') == Status::SOLUCIONADO) selected @endif>
                             {{ Status::DESCRICAO[Status::SOLUCIONADO] }}
                         </option>
-                        <option value="{{ Status::EXCLUIDO }}" @if(Request::query('status') == Status::EXCLUIDO) selected @endif>
-                            {{ Status::DESCRICAO[Status::EXCLUIDO] }}
-                        </option>
                     </select>
                     <select name="urgencia" class="form-select-sm">
                         <option value="">Selecione a Urgência</option>

@@ -65,15 +65,9 @@
                     <div class="mb-3">
                         <label for="urgencia-input" class="form-label">Urgência <span class="text-danger fw-bold">*</span></label>
                         <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror" required>
-                            @if(old('urgencia'))
-                                <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia') == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
-                                <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia') == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
-                                <option value="{{ Urgencia::ALTA }}" @if(old('urgencia') == Urgencia::ALTA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
-                            @else
-                                <option value="{{ Urgencia::BAIXA }}">{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
-                                <option value="{{ Urgencia::MEDIA }}" selected>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
-                                <option value="{{ Urgencia::ALTA }}">{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
-                            @endif
+                            <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia') == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
+                            <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia') == Urgencia::MEDIA) selected @else selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
+                            <option value="{{ Urgencia::ALTA }}" @if(old('urgencia') == Urgencia::ALTA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
                         </select>
                         @error('urgencia')
                             <span class="text-danger">{{ $message }}</span>

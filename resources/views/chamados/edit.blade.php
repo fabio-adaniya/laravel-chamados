@@ -58,17 +58,9 @@
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <select name="status" id="status-input" class="form-select @error('status') is-invalid @enderror">
-                            @if(old('status', $chamado->status))
-                                <option value="{{ Status::ABERTO }}" @if(old('status', $chamado->status) == Status::ABERTO) selected @endif>{{ Status::DESCRICAO[Status::ABERTO] }}</option>
-                                <option value="{{ Status::EM_ANDAMENTO }}" @if(old('status', $chamado->status) == Status::EM_ANDAMENTO) selected @endif>{{ Status::DESCRICAO[Status::EM_ANDAMENTO] }}</option>
-                                <option value="{{ Status::SOLUCIONADO }}" @if(old('status', $chamado->status) == Status::SOLUCIONADO) selected @endif>{{ Status::DESCRICAO[Status::SOLUCIONADO] }}</option>
-                                <option value="{{ Status::EXCLUIDO }}" @if(old('status', $chamado->status) == Status::EXCLUIDO) selected @endif>{{ Status::DESCRICAO[Status::EXCLUIDO] }}</option>
-                            @else
-                                <option value="{{ Status::ABERTO }}">{{ Status::DESCRICAO[Status::ABERTO] }}</option>
-                                <option value="{{ Status::EM_ANDAMENTO }}">{{ Status::DESCRICAO[Status::EM_ANDAMENTO] }}</option>
-                                <option value="{{ Status::SOLUCIONADO }}">{{ Status::DESCRICAO[Status::SOLUCIONADO] }}</option>
-                                <option value="{{ Status::EXCLUIDO }}">{{ Status::DESCRICAO[Status::EXCLUIDO] }}</option>
-                            @endif
+                            <option value="{{ Status::ABERTO }}" @if(old('status', $chamado->status) == Status::ABERTO) selected @endif>{{ Status::DESCRICAO[Status::ABERTO] }}</option>
+                            <option value="{{ Status::EM_ANDAMENTO }}" @if(old('status', $chamado->status) == Status::EM_ANDAMENTO) selected @endif>{{ Status::DESCRICAO[Status::EM_ANDAMENTO] }}</option>
+                            <option value="{{ Status::SOLUCIONADO }}" @if(old('status', $chamado->status) == Status::SOLUCIONADO) selected @endif>{{ Status::DESCRICAO[Status::SOLUCIONADO] }}</option>
                         </select>
                         @error('status')
                             <span class="text-danger">{{ $message }}</span>
@@ -77,15 +69,9 @@
                     <div class="mb-3">
                         <label class="form-label">Urgência</label>
                         <select name="urgencia" id="urgencia-input" class="form-select @error('urgencia') is-invalid @enderror">
-                            @if(old('urgencia', $chamado->urgencia))
-                                <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
-                                <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
-                                <option value="{{ Urgencia::ALTA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::ALTA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
-                            @else
-                                <option value="{{ Urgencia::BAIXA }}">{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
-                                <option value="{{ Urgencia::MEDIA }}" selected>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
-                                <option value="{{ Urgencia::ALTA }}">{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
-                            @endif
+                            <option value="{{ Urgencia::BAIXA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
+                            <option value="{{ Urgencia::MEDIA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
+                            <option value="{{ Urgencia::ALTA }}" @if(old('urgencia', $chamado->urgencia) == Urgencia::ALTA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::ALTA] }}</option>
                         </select>
                         @error('urgencia')
                             <span class="text-danger">{{ $message }}</span>
