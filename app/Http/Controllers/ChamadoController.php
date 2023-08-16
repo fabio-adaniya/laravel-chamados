@@ -50,17 +50,11 @@ class ChamadoController extends Controller
             'urgencia_justificativa' => 'required_if:urgencia,==,'.Urgencia::ALTA,
         ]);
 
-        $chamado = $this->criarChamado($validated);
+        $chamado = Chamado::create($validated);
 
         $this->criarSolicitantesDoChamado($request, $chamado);
 
         return redirect()->route('chamados.index');
-    }
-
-    public function criarChamado($validated)
-    {
-        $validated['status'] = Status::ABERTO;
-        return Chamado::create($validated);
     }
 
     public function criarSolicitantesDoChamado(Request $request, $chamado)
