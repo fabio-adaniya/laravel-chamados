@@ -67,6 +67,10 @@
                     <th>Título</th>
                     <th>Status</th>
                     <th>Urgência</th>
+                    @if(!auth()->user()->isUsuario())
+                        <th>Solicitantes do Chamado</th>
+                    @endif
+                    <th>Atribuídos ao Chamado</th>
                     <th>Abertura</th>
                     <th>Última atualização</th>
                 </tr>
@@ -78,6 +82,26 @@
                         <td class="border"><a href="{{ auth()->user()->perfil_id == Perfil::USUARIO ? route('chamados.show', $chamado) : route('chamados.edit', $chamado) }}">{{ $chamado->titulo }}</a></td>
                         <td class="border text-nowrap">{{ Status::DESCRICAO[$chamado->status] }}</td>
                         <td class="border text-nowrap">{{ Urgencia::DESCRICAO[$chamado->urgencia] }}</td>
+                        @if(!auth()->user()->isUsuario())
+                            <td>
+                                @foreach($chamado->solicitantes as $solicitante)
+                                    @if(!$loop->last)
+                                        {{ $solicitante->usuario->name }},
+                                    @else
+                                        {{ $solicitante->usuario->name }}
+                                    @endif
+                                @endforeach
+                            </td>
+                        @endif
+                        <td>
+                            @foreach($chamado->atribuidos as $atribuido)
+                                @if(!$loop->last)
+                                    {{ $atribuido->usuario->name }},
+                                @else
+                                    {{ $atribuido->usuario->name }}
+                                @endif
+                            @endforeach
+                        </td>
                         <td class="border text-nowrap">{{ $chamado->updated_at ? $chamado->updated_at->format('d/m/Y H:m') : '' }}</td>
                         <td class="border text-nowrap">{{ $chamado->created_at ? $chamado->created_at->format('d/m/Y H:m') : '' }}</td>
                     </tr>
