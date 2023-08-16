@@ -43,6 +43,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('acesso-pessoal', function(User $user, User $userAlvo){
             if($user->id == $userAlvo->id)
                 return true;
+            else if(($userAlvo->isAdministrador()) && (!$user->isAdministrador()))
+                return false;
             else if($user->isTecnico())
                 return true;
         });

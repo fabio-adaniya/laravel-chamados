@@ -11,7 +11,9 @@
                 <div class="mb-3">Ativo: {{ $user->ativo ? 'Sim' : 'Não' }}</div>
                 <div class="mb-3">Perfil: {{ Perfil::DESCRICAO[$user->perfil_id] }}</div>
                 <div class="d-flex">
-                    <a href="{{ route('users.chamados', $user) }}" class="btn btn-info btn-sm">Chamados deste Usuário</a>
+                    @if(!auth()->user()->isUsuario())
+                        <a href="{{ route('users.chamados', $user) }}" class="btn btn-info btn-sm">Chamados deste Usuário</a>
+                    @endif
                     <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm ms-auto"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                 </div>
             </div>

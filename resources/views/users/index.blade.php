@@ -19,7 +19,11 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>
-                            <a href="{{ route('users.show', $user) }}" class="link-opacity-10-hover">{{ $user->name }}</a>
+                            @can('acesso-pessoal', $user)
+                                <a href="{{ route('users.show', $user) }}" class="link-opacity-10-hover">{{ $user->name }}</a>
+                            @else
+                                <span>{{ $user->name }}</span>
+                            @endcan
                         </td>
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>

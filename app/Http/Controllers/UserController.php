@@ -70,7 +70,9 @@ class UserController extends Controller
 
     public function chamados(User $user)
     {
+        $this->authorize('perfil-tecnico');
         $this->authorize('acesso-pessoal', $user);
+        
         return view('users.chamados', ['user' => $user]);
     }
 }
