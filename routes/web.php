@@ -6,6 +6,7 @@ use App\Http\Controllers\SolicitanteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AtribuidoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::middleware('auth')->group(function(){
-    Route::view('/', 'home')->name('home');
+    Route::get('/', HomeController::class)->name('home');
     Route::resource('chamados', ChamadoController::class);
     Route::get('/solicitante', [SolicitanteController::class, 'buscar']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
