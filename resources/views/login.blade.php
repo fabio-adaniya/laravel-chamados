@@ -1,79 +1,18 @@
 @section('title', 'Login - '.config('app.name'))
 
-@push('script')
-    <script>
-        $(document).ready(function(){
-            emailUsuario();
-        });
-
-        function emailUsuario()
-        {
-            if($("#radio-username").is(":checked"))
-            {
-                $("#div-username").show();
-                $("#input-username").prop("disabled", false);
-                $("#input-username").focus();
-
-                $("#div-email").hide();
-                $("#input-email").prop("disabled", true);
-            }
-            else
-            {
-                $("#div-username").hide();
-                $("#input-username").prop("disabled", true);
-
-                $("#div-email").show();
-                $("#input-email").prop("disabled", false);
-                $("#input-email").focus();
-            }
-        }
-
-        $("#radio-username").click(function(){
-            emailUsuario();
-        });
-
-        $("#radio-email").click(function(){
-            emailUsuario();
-        });
-    </script>
-@endpush
-
 <x-layout>
-    <div class="d-flex justify-content-center vh-100 align-items-center">
+    <div class="d-flex justify-content-center vh-100 align-items-center bg-light">
         <div>
-            <div class="card m-3 border-0 bg-transparent">
-                <div class="card-body">
-                    <h5 class="d-flex justify-content-center">{{ config('app.name') }}</h5>
-                </div>
-            </div>
             <div class="card m-3" style="width: 500px">
-                <div class="card-body">
+                <div class="card-body p-5">
                     <form action="{{ route('login.validar') }}" method="POST">
                         @csrf
-                        <div class="d-flex justify-content-center mb-3">Login</div>
-                        <div class="d-flex justify-content-center mb-3">
-                            <div class="d-flex gap-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio-username" checked/>
-                                    <label class="form-check-label" for="radio-username">Usuário</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio-email"/>
-                                    <label class="form-check-label" for="radio-email">E-mail</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3" id="div-username">
-                            <label for="input-username" class="form-label">Usuário</label>
-                            <input type="text" id="input-username" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}"/>
-                            @error('username')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3" id="div-email">
-                            <label for="input-email" class="form-label">E-mail</label>
-                            <input type="text" id="input-email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"/>
-                            @error('email')
+                        <h4 class="d-flex justify-content-center mb-3">{{ config('app.name') }}</h4>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="input-username_email" class="form-label">Usuário/E-mail</label>
+                            <input type="text" id="input-username_email" name="username_email" class="form-control @error('username_email') is-invalid @enderror" value="{{ old('username_email') }}"/>
+                            @error('username_email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -85,12 +24,10 @@
                             @enderror
                         </div>
                         <div class="d-flex">
-                            <button type="submit" class="btn btn-primary btn-sm ms-auto">
-                                <i class="fa-solid fa-right-to-bracket"></i> Acessar
-                            </button>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
                         </div>
                         @error('login')
-                            <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center mt-3">
                                 <span class="text-danger fw-bold">{{ $message }}</span>
                             </div>
                         @enderror

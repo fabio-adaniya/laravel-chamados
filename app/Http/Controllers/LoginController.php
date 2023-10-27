@@ -10,24 +10,15 @@ class LoginController extends Controller
 {
     public function validar(Request $request)
     {
-        if(isset($request->email))
-        {
-            $request->validate([
-                'email' => 'required',
-                'password' => 'required'
-            ]);
+        $request->validate([
+            'username_email' => 'required',
+            'password' => 'required'
+        ]);
 
-            $autenticacao = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'ativo' => true]);
-        }
-        else
-        {
-            $request->validate([
-                'username' => 'required',
-                'password' => 'required'
-            ]);
+        $autenticacao = Auth::attempt(['username' => $request->username_email, 'password' => $request->password, 'ativo' => true]);
 
-            $autenticacao = Auth::attempt(['username' => $request->username, 'password' => $request->password, 'ativo' => true]);
-        }
+        if(!$autenticacao)
+            $autenticacao = Auth::attempt(['email' => $request->username_email, 'password' => $request->password, 'ativo' => true]);
 
         if($autenticacao)
         {
