@@ -27,7 +27,7 @@
         <div class="card m-3" style="width: 500px">
             <form action="{{ route('users.store') }}" method="POST">
                 @csrf
-                <div class="card-header text-center text-white teal">
+                <div class="card-header text-center text-white blue-gray">
                     Cadastrar Usuário
                 </div>
                 <div class="card-body">
@@ -87,11 +87,11 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
-                <div class="card-footer teal d-flex">
-                    <button type="submit" class="btn btn-outline-primary btn-sm text-white border-white ms-auto">
-                        <i class="fa-regular fa-floppy-disk"></i> Salvar
-                    </button>
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                            <i class="fa-regular fa-floppy-disk"></i> Salvar
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@
     <x-menu/>
     <div class="table-responsive m-3">
         <table class="table table-sm table-hover">
-            <thead class="teal text-white">
+            <thead class="blue-gray text-white">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>

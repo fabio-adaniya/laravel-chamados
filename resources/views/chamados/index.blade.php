@@ -61,7 +61,7 @@
     </div>
     <div class="table-responsive m-3">
         <table class="table table-sm table-hover">
-            <thead class="teal text-white">
+            <thead class="blue-gray text-white">
                 <tr>
                     <th>ID</th>
                     <th>Título</th>

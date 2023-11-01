@@ -11,14 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
         @stack('style')
         <style>
-            .sand-dollar{
-                background-color: #E5DDC8;
-            }
-
-            .teal{
-                background-color: #01949A;
-            }
-
             .baby-blue{
                 background-color: #C3E0E5;
             }
@@ -30,13 +22,9 @@
             .dark-blue{
                 background-color: #274472;
             }
-
-            .ivory{
-                background-color: #EDE7DC;
-            }
         </style>
     </head>
-    <body class="ivory">
+    <body class="bg-light">
         {{ $slot }}
 
         @stack('script')

@@ -44,7 +44,7 @@
         <div class="card m-3" style="width: 700px">
             <form action="{{ route('chamados.store') }}" method="POST">
                 @csrf
-                <div class="card-header text-center teal text-white">
+                <div class="card-header text-center blue-gray text-white">
                     Cadastrar Chamado
                 </div>
                 <div class="card-body">
@@ -93,11 +93,9 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
-                <div class="card-footer teal">
                     <div class="d-flex">
-                        <button type="submit" class="btn btn-outline-primary text-white btn-sm ms-auto border-white">
-                            <i class="fa-solid fa-plus me-1"></i>Enviar chamado
+                        <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                            <i class="fa-solid fa-plus"></i> Enviar chamado
                         </button>
                     </div>
                 </div>

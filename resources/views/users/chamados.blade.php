@@ -2,7 +2,7 @@
     <x-menu/>
     <div class="table-responsive m-3">
         <table class="table table-sm table-hover">
-            <thead class="teal text-white">
+            <thead class="blue-gray text-white">
                 <tr>
                     <th colspan="99" class="text-center">Chamados do Usuário: {{ $user->name }}</th>
                 </tr>

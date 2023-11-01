@@ -49,7 +49,7 @@
 <x-layout>
     <x-menu/>
     <h3 class="text-center mt-3">Editar chamado - {{ $chamado->id }}</h3>
-    <div class="d-flex flex-wrap m-3">
+    <div class="d-flex flex-wrap m-3 gap-3">
         <div class="card border" style="width: 250px">
             <div class="card-body">
                 <form action="{{ route('chamados.update', $chamado) }}" method="POST">

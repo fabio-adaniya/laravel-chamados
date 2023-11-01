@@ -7,7 +7,7 @@
             <form action="{{ route('users.update', $user) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="card-header text-center teal text-white">
+                <div class="card-header text-center blue-gray text-white">
                     Editar usuário - {{ $user->id }}
                 </div>
                 <div class="card-body">
@@ -50,11 +50,11 @@
                             <option value="{{ Perfil::USUARIO }}" @if(old('perfil_id', $user->perfil_id) == Perfil::USUARIO) selected @endif>{{ Perfil::DESCRICAO[Perfil::USUARIO] }}</option>
                         </select>
                     </div>
-                </div>
-                <div class="card-footer teal d-flex">
-                    <button type="submit" class="btn btn-outline-primary btn-sm ms-auto border-white text-white">
-                        <i class="fa-regular fa-floppy-disk"></i> Salvar
-                    </button>
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                            <i class="fa-regular fa-floppy-disk"></i> Salvar
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
