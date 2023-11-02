@@ -116,7 +116,10 @@
                     <td colspan="99" class="border-0">
                         <div class="d-flex pt-3">
                             <div class="d-flex gap-3 ms-auto">
-                                <span>Exibindo: {{ $chamados->firstItem() }} a {{ $chamados->lastItem() }}</span><span>Total de Registros: {{ $chamados->total() }}</span>
+                                @if($chamados->total() > 0)
+                                    <span>Exibindo: {{ $chamados->firstItem() }} a {{ $chamados->lastItem() }}</span>
+                                @endif
+                                <span>Total de Registros: {{ $chamados->total() }}</span>
                             </div>
                             <span class="ms-auto">{{ $chamados->appends(request()->except('page'))->links() }}</span>
                         </div>
@@ -124,5 +127,5 @@
                 </tr>
             </tfoot>
         </table>
-    </div>  
+    </div>
 </x-layout>
