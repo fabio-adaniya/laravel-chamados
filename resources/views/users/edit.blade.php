@@ -32,26 +32,31 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="select-ativo" class="form-label">Ativo <span class="text-danger fw-bold">*</span></label>
-                        <select name="ativo" id="select-ativo" class="form-select @error('ativo') is-invalid @enderror" required>
-                            <option value="1" @if(old('ativo', $user->ativo) == '1') selected @endif>Sim</option>
-                            <option value="0" @if(old('ativo', $user->ativo) == '0') selected @endif>Não</option>
-                        </select>
-                        @error('ativo')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="select-perfil_id" class="form-label">Perfil <span class="text-danger fw-bold">*</span></label>
-                        <select name="perfil_id" id="select-perfil_id" class="form-select @error('perfil_id') is-invalid @enderror" required>
-                            <option value="{{ Perfil::ADMINISTRADOR }}" @if(old('perfil_id', $user->perfil_id) == Perfil::ADMINISTRADOR) selected @endif>{{ Perfil::DESCRICAO[Perfil::ADMINISTRADOR] }}</option>
-                            <option value="{{ Perfil::TECNICO }}" @if(old('perfil_id', $user->perfil_id) == Perfil::TECNICO) selected @endif>{{ Perfil::DESCRICAO[Perfil::TECNICO] }}</option>
-                            <option value="{{ Perfil::USUARIO }}" @if(old('perfil_id', $user->perfil_id) == Perfil::USUARIO) selected @endif>{{ Perfil::DESCRICAO[Perfil::USUARIO] }}</option>
-                        </select>
+                    <div class="d-flex gap-3 flex-wrap mb-3">
+                        <div class="flex-fill">
+                            <label for="select-ativo" class="form-label">Ativo <span class="text-danger fw-bold">*</span></label>
+                            <select name="ativo" id="select-ativo" class="form-select @error('ativo') is-invalid @enderror" required>
+                                <option value="1" @if(old('ativo', $user->ativo) == '1') selected @endif>Sim</option>
+                                <option value="0" @if(old('ativo', $user->ativo) == '0') selected @endif>Não</option>
+                            </select>
+                            @error('ativo')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex-fill">
+                            <label for="select-perfil_id" class="form-label">Perfil <span class="text-danger fw-bold">*</span></label>
+                            <select name="perfil_id" id="select-perfil_id" class="form-select @error('perfil_id') is-invalid @enderror" required>
+                                <option value="{{ Perfil::ADMINISTRADOR }}" @if(old('perfil_id', $user->perfil_id) == Perfil::ADMINISTRADOR) selected @endif>{{ Perfil::DESCRICAO[Perfil::ADMINISTRADOR] }}</option>
+                                <option value="{{ Perfil::TECNICO }}" @if(old('perfil_id', $user->perfil_id) == Perfil::TECNICO) selected @endif>{{ Perfil::DESCRICAO[Perfil::TECNICO] }}</option>
+                                <option value="{{ Perfil::USUARIO }}" @if(old('perfil_id', $user->perfil_id) == Perfil::USUARIO) selected @endif>{{ Perfil::DESCRICAO[Perfil::USUARIO] }}</option>
+                            </select>
+                            @error('perfil_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="d-flex">
-                        <button type="submit" class="btn btn-primary btn-sm ms-auto">
+                        <button type="submit" class="btn btn-primary ms-auto">
                             <i class="fa-regular fa-floppy-disk"></i> Salvar
                         </button>
                     </div>
