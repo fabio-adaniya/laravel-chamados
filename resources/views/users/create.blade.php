@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="input-name" class="form-label">Nome <span class="text-danger fw-bold">*</span></label>
-                        <input type="text" name="name" id="input-name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                        <input type="text" name="name" id="input-name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required autofocus>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
