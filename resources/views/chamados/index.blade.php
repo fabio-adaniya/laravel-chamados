@@ -2,19 +2,35 @@
 
 @push('script')
     <script>
-        $("#input-registros_por_pagina").change(function(){
+        function form_submit(){
             $("form").submit();
+        }
+
+        $("#select-registros_por_pagina").change(function(){
+            form_submit();
+        });
+
+        $("#select-status").change(function(){
+            form_submit();
+        });
+
+        $("#select-urgencia").change(function(){
+            form_submit();
+        });
+
+        $("#input-meus_chamados").change(function(){
+            form_submit();
         })
     </script>
 @endpush
 
 <x-layout>
     <x-menu/>
-    <div class="card m-3 bg-light">
+    <div class="card m-2 bg-light border-0">
         <div class="card-body">
             <form action="" method="GET">
                 <div class="d-flex gap-3 flex-wrap">
-                    <select name="status" class="form-select-sm">
+                    <select name="status" id="select-status" class="form-select-sm" >
                         <option value="">Selecione um Status</option>
                         <option value="{{ Status::ABERTO }}" @if(Request::query('status') == Status::ABERTO) selected @endif>
                             {{ Status::DESCRICAO[Status::ABERTO] }}
@@ -26,7 +42,7 @@
                             {{ Status::DESCRICAO[Status::SOLUCIONADO] }}
                         </option>
                     </select>
-                    <select name="urgencia" class="form-select-sm">
+                    <select name="urgencia" id="select-urgencia" class="form-select-sm">
                         <option value="">Selecione a Urgência</option>
                         <option value="{{ Urgencia::BAIXA }}" @if(Request::query('urgencia') == Urgencia::BAIXA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::BAIXA] }}</option>
                         <option value="{{ Urgencia::MEDIA }}" @if(Request::query('urgencia') == Urgencia::MEDIA) selected @endif>{{ Urgencia::DESCRICAO[Urgencia::MEDIA] }}</option>
@@ -34,18 +50,15 @@
                     </select>
                     @if(auth()->user()->perfil_id != Perfil::USUARIO)
                         <div class="form-check">
-                            <input id="meus_chamados-input" name="meus_chamados" type="checkbox" class="form-check-input" @if(Request::query("meus_chamados")) checked @endif>
-                            <label class="form-check-label" for="meus_chamados-input">
+                            <input id="input-meus_chamados" name="meus_chamados" type="checkbox" class="form-check-input" @if(Request::query("meus_chamados")) checked @endif>
+                            <label class="form-check-label" for="input-meus_chamados">
                                 Buscar apenas os meus chamados
                             </label>
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-sm btn-outline-success">
-                        <i class="fa-solid fa-magnifying-glass"></i> Pesquisar
-                    </button>
                     <div class="ms-auto">
                         Exibir registros por página:
-                        <select name="registros_por_pagina" id="input-registros_por_pagina" class="form-select-sm">
+                        <select name="registros_por_pagina" id="select-registros_por_pagina" class="form-select-sm">
                             <option value="5" @if(Request::query('registros_por_pagina') == 5) selected @endif>5</option>
                             <option value="10" @if(Request::query('registros_por_pagina') == 10) selected @endif>10</option>
                             <option value="15" @if((!Request::query('registros_por_pagina')) || (Request::query('registros_por_pagina') == 15)) selected @endif>15</option>
