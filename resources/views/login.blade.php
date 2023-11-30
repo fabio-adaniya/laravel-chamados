@@ -11,7 +11,7 @@
                         <hr>
                         <div class="mb-3">
                             <label for="input-username_email" class="form-label">Usuário/E-mail</label>
-                            <input type="text" id="input-username_email" name="username_email" class="form-control @error('username_email') is-invalid @enderror" value="{{ old('username_email') }}"/>
+                            <input type="text" id="input-username_email" name="username_email" class="form-control @error('username_email') is-invalid @enderror" value="{{ old('username_email') }}" autofocus/>
                             @error('username_email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
